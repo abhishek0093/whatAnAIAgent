@@ -17,62 +17,6 @@ It’s not just a chatbot. It’s your AI friend-cum-helper built for real conve
 # Project OverView
 
 ## How it works
-
-```
-                         Meta WhatsApp Cloud API
-                                   │
-                                   │ webhook POST /webhook
-                                   ▼
-                       ┌───────────────────────┐
-                       │  FastAPI (uvicorn)    │
-                       │  src/main.py          │
-                       └───────────┬───────────┘
-                                   │
-                  ┌────────────────┼─────────────────┐
-                  │                │                 │
-                  ▼                ▼                 ▼
-        ┌─────────────────┐  ┌────────────┐  ┌────────────────┐
-        │ process_message │  │ memory     │  │ update_memory  │
-        │ (hot path)      │  │ MEMORY[..] │  │ (background)   │
-        │                 │  │ in RAM     │  │                │
-        │ - load profile  │  │            │  │ - structured   │
-        │ - load history  │  │ User-      │  │   output diff  │
-        │ - call agent ──▶│  │ keyed dict │◀─│ - merge into   │
-        │ - reply         │  │            │  │   profile +    │
-        │ - append turn   │─▶│            │─▶│   notes        │
-        └────────┬────────┘  └─────┬──────┘  └────────────────┘
-                 │                 │
-                 ▼                 │
-        ┌──────────────────────┐   │
-        │  agent (LangChain)   │   │
-        │  create_agent +      │   │
-        │  ReAct loop          │   │
-        │                      │   │
-        │  ┌────────────────┐  │   │
-        │  │ Gemini (model) │  │   │
-        │  └────────┬───────┘  │   │
-        │           │ tool_calls   │
-        │           ▼              │
-        │  ┌────────────────┐      │
-        │  │ tools/         │      │
-        │  │  get_weather   │      │
-        │  │  (Open-Meteo)  │      │
-        │  └────────────────┘      │
-        └──────────┬───────────────┘
-                   │ final reply
-                   ▼
-        ┌─────────────────┐  ┌────────────────────┐
-        │ send_whatsapp_  │  │ SQLite             │
-        │ message (Graph  │  │ memory.sqlite      │
-        │ API)            │  │ user_memory table  │
-        └─────────────────┘  └────────────────────┘
-                 │                 ▲
-                 │                 │ periodic_flush_task
-                 │                 │ (every N seconds + on shutdown)
-                 ▼
-            Reply to user
-```
-
 A request lifecycle:
 
 1. **WhatsApp Cloud API** pushes an inbound message JSON to `POST /webhook`.
