@@ -192,4 +192,15 @@ ngrok prints a public URL like `https://abc123.ngrok-free.app`. In the Meta What
 Send a WhatsApp message to the Cloud API sandbox number — within a couple of seconds you should see logs in your service terminal and a reply land on your phone.
 
 ## Demo
-![conv1](examples/conv1.png) ![conv2](examples/conv2.png) ![conv3](examples/conv3.png)
+![conv1](examples/conv1.png)
+ 
+
+
+
+![conv2](examples/conv2.png) 
+
+
+
+
+
+![conv3](examples/conv3.png)
