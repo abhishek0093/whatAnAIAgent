@@ -1,5 +1,5 @@
 # INTRODUCTION : whatAnAIAgent
-Meet WhatAnAIAgent, your personal AI companion that does far more than just reply to messages.
+Meet WhatAnAIAgent, your personal AI companion that does far more than just reply to whatsapp messages.
 
 Imagine having a super-intelligent friend who truly understands you, adapts to your personality, learns your style, and actually helps you get things done. Whether you need assistance, advice, planning, creativity, bookings or just someone to vibe with WhatAnAIAgent is always there.
 
